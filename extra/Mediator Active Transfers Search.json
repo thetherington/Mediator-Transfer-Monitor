@@ -1,0 +1,26 @@
+[
+  {
+    "_id": "eb1cd690-d72c-11ea-b4cd-b9b77d036d68",
+    "_type": "search",
+    "_source": {
+      "title": "Mediator Active Transfers",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "poller.mediator.transfers.s_medianame",
+        "poller.mediator.transfers.s_jobid",
+        "poller.mediator.transfers.s_destinationmatid",
+        "poller.mediator.transfers.s_transferprogress",
+        "poller.mediator.transfers.i_elapsed_minutes"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"log-metric-poller-mediator-*\",\"highlightAll\":true,\"version\":true,\"filter\":[],\"query\":{\"query_string\":{\"query\":\"_exists_:poller.mediator.transfers\",\"analyze_wildcard\":true}}}"
+      }
+    }
+  }
+]
