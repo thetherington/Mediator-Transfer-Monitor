@@ -38,3 +38,47 @@ To configure a poller to use the module start a new python poller configuration 
 7. Save changes, then restart the poller program.
 
 ## Testing:
+_todo.._
+
+## Sample Data Output:
+
+```
+[
+ {
+  "fields": {
+   "jobID": "4065077",
+   "serviceHost": "aws-core02",
+   "mediaName": "AsperaKMTC",
+   "transferProgress": null,
+   "jobStartTime": "2020-11-12T14:20:42.190",
+   "mediaPendingTransfer": "0",
+   "elapsed_seconds": 10,
+   "destinationMatId": "BOBS1221FXX0224",
+   "elapsed_minutes": 0,
+   "serviceName": "Turbine",
+   "mediaOffline": "false",
+   "d_elapsed_hours": 0.0
+  },
+  "name": "transfers",
+  "host": "aws-core02"
+ },
+ {
+  "fields": {
+   "jobID": "4065076",
+   "serviceHost": "aws-core02",
+   "mediaName": "AsperaWoodlands",
+   "transferProgress": "100",
+   "jobStartTime": "2020-11-12T14:20:42.190",
+   "mediaPendingTransfer": "0",
+   "elapsed_seconds": 10,
+   "destinationMatId": "BOBS1221FXX0224",
+   "elapsed_minutes": 0,
+   "serviceName": "Turbine",
+   "mediaOffline": "false",
+   "d_elapsed_hours": 0.0
+  },
+  "name": "transfers",
+  "host": "aws-core02"
+ }
+]
+```
