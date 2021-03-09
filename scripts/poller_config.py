@@ -9,6 +9,8 @@ class Plugin(InsitePlugin):
 
     def fetch(self, hosts):
 
+        host = hosts[-1]
+
         try:
 
             self.collector
@@ -16,12 +18,14 @@ class Plugin(InsitePlugin):
         except Exception:
 
             params = {
-                "host": "aws-core03.ironmam.mws.disney.com",
+                "host": host,
                 "port": "8080",
                 "insite": None,
-                "theshold": None,
+                "hostname": "ip-10-127-17-94",
+                # "login": {"user": "evertz", "pass": "pharos1"},
+                "system_name": "MAM_Production",
             }
 
             self.collector = MediatorTransferMon(**params)
 
-        return json.dumps(self.collector.process)
+        return json.dumps(self.collector.process())
