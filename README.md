@@ -64,42 +64,67 @@ _todo.._
 [
  {
   "fields": {
-   "jobID": "4065077",
-   "serviceHost": "aws-core02",
-   "mediaName": "AsperaKMTC",
-   "transferProgress": null,
-   "jobStartTime": "2020-11-12T14:20:42.190",
-   "mediaPendingTransfer": "0",
-   "elapsed_seconds": 10,
-   "destinationMatId": "BOBS1221FXX0224",
-   "elapsed_minutes": 0,
    "serviceName": "Turbine",
+   "serviceHost": "aws-core02",
+   "mediaName": "CommercialStaging",
    "mediaOffline": "false",
-   "d_elapsed_hours": 0.0,
-   "s_system": "MAN_Production"
+   "mediaPendingTransfer": "1",
+   "system": "MAM_Production",
+   "destinationMatId": "MEDX-CM81339",
+   "jobID": "1856634",
+   "jobStartTime": "2020-07-29T21:34:20.808",
+   "transferProgress": null,
+   "executor": "CommercialStagingExecutor-0",
+   "status": "In Use",
+   "elapsed_seconds": 19341354,
+   "elapsed_minutes": 322355,
+   "d_elapsed_hours": 5372.6
   },
-  "name": "transfers",
-  "host": "aws-core02"
+  "host": "aws-core02",
+  "name": "transfers"
  },
  {
   "fields": {
-   "jobID": "4065076",
-   "serviceHost": "aws-core02",
-   "mediaName": "AsperaWoodlands",
-   "transferProgress": "80",
-   "transferProgress_pct": 0.8
-   "jobStartTime": "2020-11-12T14:20:42.190",
-   "mediaPendingTransfer": "0",
-   "elapsed_seconds": 10,
-   "destinationMatId": "BOBS1221FXX0224",
-   "elapsed_minutes": 0,
    "serviceName": "Turbine",
+   "serviceHost": "aws-core02",
+   "mediaName": "S3Browse",
    "mediaOffline": "false",
-   "d_elapsed_hours": 0.0,
-   "s_system": "MAN_Production"
+   "mediaPendingTransfer": "1",
+   "system": "MAM_Production",
+   "destinationMatId": "MEDX_PJCP0450100H",
+   "jobID": "2028953",
+   "jobStartTime": "2020-08-04T17:41:34.672",
+   "transferProgress": "59",
+   "executor": "S3BrowseExecutor-0",
+   "status": "In Use",
+   "d_transferProgress_pct": 0.59,
+   "elapsed_seconds": 18836920,
+   "elapsed_minutes": 313948,
+   "d_elapsed_hours": 5232.5
   },
-  "name": "transfers",
-  "host": "aws-core02"
+  "host": "aws-core02",
+  "name": "transfers"
+ },
+ {
+  "fields": {
+   "serviceName": "Turbine",
+   "serviceHost": "aws-core02",
+   "mediaName": "StoreStaging",
+   "mediaOffline": "false",
+   "mediaPendingTransfer": "2",
+   "system": "MAM_Production",
+   "destinationMatId": "MEDX_PJCP0450100H",
+   "jobID": "2028954",
+   "jobStartTime": "2020-08-04T17:41:34.675",
+   "transferProgress": null,
+   "executor": "StoreStagingExecutor-0",
+   "status": "In Use",
+   "elapsed_seconds": 18836920,
+   "elapsed_minutes": 313948,
+   "d_elapsed_hours": 5232.5
+  },
+  "host": "aws-core02",
+  "name": "transfers"
  }
 ]
 ```
