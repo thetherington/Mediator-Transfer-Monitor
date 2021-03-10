@@ -22,7 +22,7 @@ class Plugin(InsitePlugin):
                 "port": "8080",
                 "insite": None,
                 "hostname": "ip-10-127-17-94",
-                # "login": {"user": "evertz", "pass": "pharos1"},
+                "login": {"user": "evertz", "pass": "pharos1"},
                 "system_name": "MAM_Production",
             }
 
