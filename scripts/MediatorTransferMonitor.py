@@ -1,6 +1,7 @@
 import datetime
 import json
 from xml.dom import minidom
+import copy
 
 import requests
 
@@ -200,6 +201,8 @@ class MediatorTransferMon:
 
             for executor in service_info.getElementsByTagName("ExecutorMedia"):
 
+                fields = {}
+
                 fields = {
                     "serviceName": get_element(service_info, "ServiceName"),
                     "serviceHost": get_element(service_info, "ServiceHostName"),
@@ -208,9 +211,14 @@ class MediatorTransferMon:
                     "mediaPendingTransfer": get_element(executor, "NumberOfPendingTransfers"),
                 }
 
+                if self.system_name:
+                    fields.update({"system": self.system_name})
+
                 for execinfo in executor.getElementsByTagName("ExecutorInfo"):
 
-                    fields.update(
+                    executor_fields = {}
+
+                    executor_fields.update(
                         {
                             "destinationMatId": get_element(execinfo, "DestinationMatId"),
                             "jobID": get_element(execinfo, "JobId"),
@@ -219,44 +227,61 @@ class MediatorTransferMon:
                         }
                     )
 
+                    for transferNodeExecutor in execinfo.getElementsByTagName(
+                        "TransferNodeExecutor"
+                    ):
+
+                        executor_fields.update(
+                            {
+                                "executor": get_element(transferNodeExecutor, "Name"),
+                                "status": get_element(transferNodeExecutor, "Status"),
+                            }
+                        )
+
                     try:
 
-                        fields["d_transferProgress_pct"] = int(fields["transferProgress"]) / 100
+                        executor_fields["d_transferProgress_pct"] = (
+                            int(executor_fields["transferProgress"]) / 100
+                        )
 
                     except Exception:
                         pass
 
-                for dt_format in [
-                    "%Y-%m-%dT%H:%M:%S.%f",
-                    "%Y-%m-%dT%H:%M:%S",
-                ]:
+                    for dt_format in [
+                        "%Y-%m-%dT%H:%M:%S.%f",
+                        "%Y-%m-%dT%H:%M:%S",
+                    ]:
 
-                    try:
+                        try:
 
-                        dt = datetime.datetime.strptime(fields["jobStartTime"], dt_format)
-                        dt_delta = datetime.datetime.utcnow() - dt
+                            dt = datetime.datetime.strptime(
+                                executor_fields["jobStartTime"], dt_format
+                            )
 
-                        fields.update(
-                            {
-                                "elapsed_seconds": int(dt_delta.total_seconds()),
-                                "elapsed_minutes": int(dt_delta.total_seconds() / 60),
-                                "d_elapsed_hours": round(dt_delta.total_seconds() / 60 / 60, 1),
-                            }
-                        )
+                            dt_delta = datetime.datetime.utcnow() - dt
 
-                    except Exception:
-                        continue
+                            executor_fields.update(
+                                {
+                                    "elapsed_seconds": int(dt_delta.total_seconds()),
+                                    "elapsed_minutes": int(dt_delta.total_seconds() / 60),
+                                    "d_elapsed_hours": round(dt_delta.total_seconds() / 60 / 60, 1),
+                                }
+                            )
 
-                if self.system_name:
-                    fields.update({"s_system": self.system_name})
+                        except Exception:
+                            continue
 
-                document = {
-                    "fields": fields,
-                    "host": fields["serviceHost"],
-                    "name": "transfers",
-                }
+                    _fields = copy.deepcopy(fields)
 
-                documents.append(document)
+                    _fields.update(executor_fields)
+
+                    document = {
+                        "fields": _fields,
+                        "host": _fields["serviceHost"],
+                        "name": "transfers",
+                    }
+
+                    documents.append(document)
 
         # print(doc.toprettyxml())
 
@@ -273,7 +298,7 @@ def main():
         "hostname": "ip-10-127-17-94",
         "login": {"user": "evertz", "pass": "pharos1"},
         "system_name": "MAM_Production",
-        # "local_file": "response.xml",
+        "local_file": "response.xml",
     }
 
     transfer = MediatorTransferMon(**params)
