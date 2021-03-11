@@ -298,7 +298,7 @@ def main():
         "hostname": "ip-10-127-17-94",
         "login": {"user": "evertz", "pass": "pharos1"},
         "system_name": "MAM_Production",
-        "local_file": "response.xml",
+        # "local_file": "multiple_Executors.xml",
     }
 
     transfer = MediatorTransferMon(**params)
