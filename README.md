@@ -31,11 +31,29 @@ To configure a poller to use the module start a new python poller configuration 
 
 1. Click the create a custom poller from the poller application settings page.
 2. Enter a Name, Summary and Description information.
-3. Enter the mediator server running information center in the _Hosts_ tab (can use DNS if it's available.
+3. Enter the mediator server running information center in the _Hosts_ tab (can use DNS if it's available).
 4. From the _Input_ tab change the _Type_ to __Python__
 5. From the _Input_ tab change the _Metric Set Name_ field to __mediator__
 6. Select the _Script_ tab, then paste the contents of __scripts/poller_config.py__ into the script panel.
-7. Save changes, then restart the poller program.
+7. Update the parameters "system_name" and "login" with the correct information.  
+   __Insert the correct hostname for the mediator node running the transfer service.__
+
+```
+            params = {
+                "host": host,
+                "port": "8080",
+                "insite": None,
+                "hostname": "ip-10-127-17-94",
+                "login": {"user": "evertz", "pass": "pharos1"},
+                "system_name": "MAM_Production",
+            }
+```
+
+      Note: If the Mediator Information center does not require a user credentials, remove the "login" parameter from the params dictionary.
+
+      Note: You can use the value "_auto_" in the hostname to have the script figure out the correct hostname of the node running the transfer service.  Update the "insite" parameter with the ip address of the insite system for auto hostname lookup mode to work. For this to work, the mediator metrics collection has to be fully working
+
+8. Save changes, then restart the poller program.
 
 ## Testing:
 _todo.._
@@ -46,39 +64,67 @@ _todo.._
 [
  {
   "fields": {
-   "jobID": "4065077",
-   "serviceHost": "aws-core02",
-   "mediaName": "AsperaKMTC",
-   "transferProgress": null,
-   "jobStartTime": "2020-11-12T14:20:42.190",
-   "mediaPendingTransfer": "0",
-   "elapsed_seconds": 10,
-   "destinationMatId": "BOBS1221FXX0224",
-   "elapsed_minutes": 0,
    "serviceName": "Turbine",
+   "serviceHost": "aws-core02",
+   "mediaName": "CommercialStaging",
    "mediaOffline": "false",
-   "d_elapsed_hours": 0.0
+   "mediaPendingTransfer": "1",
+   "system": "MAM_Production",
+   "destinationMatId": "MEDX-CM81339",
+   "jobID": "1856634",
+   "jobStartTime": "2020-07-29T21:34:20.808",
+   "transferProgress": null,
+   "executor": "CommercialStagingExecutor-0",
+   "status": "In Use",
+   "elapsed_seconds": 19341354,
+   "elapsed_minutes": 322355,
+   "d_elapsed_hours": 5372.6
   },
-  "name": "transfers",
-  "host": "aws-core02"
+  "host": "aws-core02",
+  "name": "transfers"
  },
  {
   "fields": {
-   "jobID": "4065076",
-   "serviceHost": "aws-core02",
-   "mediaName": "AsperaWoodlands",
-   "transferProgress": "100",
-   "jobStartTime": "2020-11-12T14:20:42.190",
-   "mediaPendingTransfer": "0",
-   "elapsed_seconds": 10,
-   "destinationMatId": "BOBS1221FXX0224",
-   "elapsed_minutes": 0,
    "serviceName": "Turbine",
+   "serviceHost": "aws-core02",
+   "mediaName": "S3Browse",
    "mediaOffline": "false",
-   "d_elapsed_hours": 0.0
+   "mediaPendingTransfer": "1",
+   "system": "MAM_Production",
+   "destinationMatId": "MEDX_PJCP0450100H",
+   "jobID": "2028953",
+   "jobStartTime": "2020-08-04T17:41:34.672",
+   "transferProgress": "59",
+   "executor": "S3BrowseExecutor-0",
+   "status": "In Use",
+   "d_transferProgress_pct": 0.59,
+   "elapsed_seconds": 18836920,
+   "elapsed_minutes": 313948,
+   "d_elapsed_hours": 5232.5
   },
-  "name": "transfers",
-  "host": "aws-core02"
+  "host": "aws-core02",
+  "name": "transfers"
+ },
+ {
+  "fields": {
+   "serviceName": "Turbine",
+   "serviceHost": "aws-core02",
+   "mediaName": "StoreStaging",
+   "mediaOffline": "false",
+   "mediaPendingTransfer": "2",
+   "system": "MAM_Production",
+   "destinationMatId": "MEDX_PJCP0450100H",
+   "jobID": "2028954",
+   "jobStartTime": "2020-08-04T17:41:34.675",
+   "transferProgress": null,
+   "executor": "StoreStagingExecutor-0",
+   "status": "In Use",
+   "elapsed_seconds": 18836920,
+   "elapsed_minutes": 313948,
+   "d_elapsed_hours": 5232.5
+  },
+  "host": "aws-core02",
+  "name": "transfers"
  }
 ]
 ```
